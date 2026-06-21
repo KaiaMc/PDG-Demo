@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwv3mh1inhc85"]
+
+[ext_resource type="Script" uid="uid://cmx5ovbi0xbf0" path="res://path_follow_2d.gd" id="1_fni8s"]
+[ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_uu65e"]
+[ext_resource type="Texture2D" uid="uid://54yobu228nx0" path="res://assets/underwater-seascape-illustration-deep-sea-silhouette-with-fish-and-coral-reef-undersea-landscape-for-illustration-background-or-wallpaper-vector.jpg" id="2_fni8s"]
+
+[sub_resource type="Curve2D" id="Curve2D_y8tav"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1620.594, -905.84204, 0, 0, 0, 0, 1819.034, -905.84204, 0, 0, 0, 0, -1649.9924, -582.45825, 0, 0, 0, 0, 1819.034, -582.45825, 0, 0, 0, 0, -1664.6918, -200.27747, 0, 0, 0, 0, 1804.3346, -200.27747, 0, 0, 0, 0, -1664.6918, 79.008545, 0, 0, 0, 0, 1804.3346, 93.70776, 0, 0, 0, 0, -1664.6918, 358.29443, 0, 0, 0, 0, 1804.3346, 328.896, 0, 0, 0, 0, -1664.6918, 564.0841, 0, 0, 0, 0, 1819.034, 564.0841, 0, 0, 0, 0, -1679.391, 769.8738, 0, 0, 0, 0, 1804.3346, 755.17456, 0, 0, 0, 0, -1664.6918, 975.66345, 0, 0, 0, 0, 1789.6354, -53.28485, 0, 0, 0, 0, -1620.594, -905.84204)
+}
+point_count = 17
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(914, 541)
+scale = Vector2(0.5442449, 0.544245)
+curve = SubResource("Curve2D_y8tav")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-1620.594, -905.84204)
+script = ExtResource("1_fni8s")
+
+[node name="fish" type="Sprite2D" parent="Path2D/PathFollow2D"]
+z_index = 1
+rotation = -0.023420602
+scale = Vector2(0.5591244, 0.5591244)
+texture = ExtResource("1_uu65e")
+
+[node name="bg" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.82896286, 0.72476643, 0.807405, 1)
+position = Vector2(972.00006, 545)
+scale = Vector2(1.1489795, 1.1489795)
+texture = ExtResource("2_fni8s")
+metadata/_edit_lock_ = true

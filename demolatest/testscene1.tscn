@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://hp05wc0souge"]
+
+[ext_resource type="Script" uid="uid://dv2tku3p8d4ok" path="res://testsceneSCRIPT.gd" id="1_0i7dp"]
+[ext_resource type="Script" uid="uid://xi7uy8bnjk3a" path="res://addons/godOSC/scripts/OSCClient.gd" id="2_cp4ok"]
+[ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="3_3i7tp"]
+[ext_resource type="Texture2D" uid="uid://54yobu228nx0" path="res://assets/underwater-seascape-illustration-deep-sea-silhouette-with-fish-and-coral-reef-undersea-landscape-for-illustration-background-or-wallpaper-vector.jpg" id="4_cp4ok"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0i7dp")
+
+[node name="OSCServer" type="Node" parent="."]
+script = ExtResource("3_3i7tp")
+timecode_as_unix = true
+
+[node name="OSCClient" type="Node" parent="."]
+script = ExtResource("2_cp4ok")
+
+[node name="OSCClient - OUT" type="Node" parent="."]
+script = ExtResource("2_cp4ok")
+port = 4848
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 1944.0
+offset_bottom = 1108.0
+color = Color(0.24065094, 0.39214838, 0.41986132, 1)
+metadata/_edit_lock_ = true
+
+[node name="UnderwaterSeascapeIllustrationDeepSeaSilhouetteWithFishAndCoralReefUnderseaLandscapeForIllustrationBackgroundOrWallpaperVector" type="Sprite2D" parent="."]
+modulate = Color(0.40392157, 0.6745098, 0.6313726, 0.5019608)
+z_index = -1
+position = Vector2(961.00006, 539.00006)
+scale = Vector2(1.1470293, 1.1913265)
+texture = ExtResource("4_cp4ok")
+
+[connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]
