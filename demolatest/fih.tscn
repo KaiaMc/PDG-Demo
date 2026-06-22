@@ -5,22 +5,6 @@
 [ext_resource type="Script" uid="uid://b12cbivui3pck" path="res://fish_script.gd" id="2_srlfq"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_wofph"]
 
-[sub_resource type="Animation" id="Animation_srlfq"]
-resource_name = "swim"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.34151042, 3.9999971),
-"update": 0,
-"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.265)]
-}
-
 [sub_resource type="Animation" id="Animation_xgh7c"]
 length = 0.001
 tracks/0/type = "value"
@@ -78,6 +62,22 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_srlfq"]
+resource_name = "swim"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.34151042, 3.9999971),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.265)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pawmk"]
 _data = {
 &"RESET": SubResource("Animation_xgh7c"),
@@ -87,7 +87,6 @@ _data = {
 }
 
 [node name="fih" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_qsjtx")
 script = ExtResource("2_srlfq")

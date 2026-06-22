@@ -14,9 +14,11 @@ func _ready():
 	enterTween.tween_property(self, "position", Vector2(x_location, y_location), 3.0)
 	await enterTween.finished
 	fish_wander()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+#fish idle stuff
 func fish_wander():
 	animation_player.play("swim")
