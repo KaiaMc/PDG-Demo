@@ -13,8 +13,8 @@ var rng = RandomNumberGenerator.new()
 #0 is no one, 1 is someone
 var person_found = 0
 var fish_instance = null
-var fish_x_spawn
-var fish_y_spawn
+var fish_x_spawn = 100
+var fish_y_spawn = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,6 +32,7 @@ func _process(delta):
 
 func PersonDetection():
 	print("running person detection...")
+	fish_y_spawn = rng.randf_range(200, 800)
 	if person_found == 0:
 		await get_tree().create_timer(1.0).timeout #increase timeout later
 		if fish_instance != null:
@@ -51,16 +52,16 @@ func PersonDetection():
 				add_child(fish_instance)
 			
 			# USE FOR FINAL FISH SPAWNING, COMMENTED OUT FOR DEMONSTRATING
-			#if person_x * viewport_size.x <= 960:
-				#fish_x_spawn = 10 #off screen to LEFT
-			#else:
-				#fish_x_spawn = 1900 #off screen to RIGHT
+			if person_x * viewport_size.x <= 960:
+				fish_x_spawn = 10 #off screen to LEFT
+			else:
+				fish_x_spawn = 1920 #off screen to RIGHT
 			
-			fish_y_spawn = rng.randf_range(200, 800)
+			#fish_y_spawn = rng.randf_range(200, 800)
 			
 			fish_instance.global_position = Vector2(
-			person_x * viewport_size.x, fish_y_spawn
+			#person_x * viewport_size.x, fish_y_spawn
 			#use below for actual setup !! above demonstrating only
-			#fish_x_spawn, fish_y_spawn
+			fish_x_spawn, fish_y_spawn
 			)
 			
