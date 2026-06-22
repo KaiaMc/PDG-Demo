@@ -12,6 +12,7 @@ var rng = RandomNumberGenerator.new()
 
 #0 is no one, 1 is someone
 var person_found = 0
+
 var fish_instance = null
 var fish_x_spawn = 100
 var fish_y_spawn = 100

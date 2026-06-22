@@ -15,10 +15,7 @@ func _ready():
 	await enterTween.finished
 	fish_wander()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 #fish idle stuff
 func fish_wander():
 	animation_player.play("swim")
+	#hitboxes mult with neg 1 to turn direction
