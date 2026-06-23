@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch6s8l8fk6mj0"]
+[gd_scene load_steps=11 format=3 uid="uid://ch6s8l8fk6mj0"]
 
 [ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_qsjtx"]
 [ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="2_hgq8g"]
@@ -86,6 +86,10 @@ _data = {
 &"swim": SubResource("Animation_srlfq")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srlfq"]
+radius = 133.36096
+height = 546.68463
+
 [node name="fih" type="Sprite2D"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_qsjtx")
@@ -108,3 +112,10 @@ reset_on_save = false
 libraries = {
 &"": SubResource("AnimationLibrary_pawmk")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6.6666675, 6.6666675)
+rotation = 1.5721836
+shape = SubResource("CapsuleShape2D_srlfq")

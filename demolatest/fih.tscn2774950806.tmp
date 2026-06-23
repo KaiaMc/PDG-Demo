@@ -1,0 +1,124 @@
+[gd_scene load_steps=12 format=3 uid="uid://ch6s8l8fk6mj0"]
+
+[ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_qsjtx"]
+[ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="2_hgq8g"]
+[ext_resource type="Script" uid="uid://b12cbivui3pck" path="res://fish_script.gd" id="2_srlfq"]
+[ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_wofph"]
+[ext_resource type="PackedScene" uid="uid://mm0xhkhks2lf" path="res://wander.tscn" id="4_srlfq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srlfq"]
+radius = 133.36096
+height = 546.68463
+
+[sub_resource type="Animation" id="Animation_xgh7c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0sgxb"]
+resource_name = "byebye"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pawmk"]
+resource_name = "hello"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_srlfq"]
+resource_name = "swim"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.34151042, 3.9999971),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.265)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pawmk"]
+_data = {
+&"RESET": SubResource("Animation_xgh7c"),
+&"byebye": SubResource("Animation_0sgxb"),
+&"hello": SubResource("Animation_pawmk"),
+&"swim": SubResource("Animation_srlfq")
+}
+
+[node name="fih" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("2_srlfq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.6666675, 6.6666675)
+rotation = 1.5721836
+shape = SubResource("CapsuleShape2D_srlfq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qsjtx")
+
+[node name="OSCServer" type="Node" parent="."]
+script = ExtResource("2_wofph")
+timecode_as_unix = true
+
+[node name="OSCReceiver" type="Node" parent="." node_paths=PackedStringArray("target_server")]
+script = ExtResource("2_hgq8g")
+target_server = NodePath("../OSCServer")
+osc_address = "/fih"
+parent_control_setting = 1
+interpolation = true
+interpolation_factor = 0.05
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_pawmk")
+}
+
+[node name="Wander" parent="." instance=ExtResource("4_srlfq")]
