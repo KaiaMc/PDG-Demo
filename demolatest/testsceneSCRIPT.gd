@@ -1,5 +1,4 @@
 extends Node2D
-@onready var color_rect = $ColorRect
 
 const FISH = preload("res://fih.tscn")
 
@@ -22,23 +21,32 @@ func _ready():
 	viewport_size = get_viewport().get_visible_rect().size
 
 func _on_osc_server_message_received(address, value, time):
-	if address == "/left_eye:x":
+	if address == "/detection":
 		person_found = value[0]
 		PersonDetection()
 	if address == "/nose:x":
 		person_x = value[0]
 
 func _process(delta):
-	pass #var viewport_size = get_viewport().get_visible_rect().size
+	if Testglobal.fishgone == true:
+		fish_instance.queue_free()
+		fish_instance = null
+		Testglobal.fishgone = false
 
 func PersonDetection():
+	if person_found == 1 and fish_instance != null:
+		print("fish already spawned, returning...")
+		return
 	print("running person detection...")
 	fish_y_spawn = rng.randf_range(200, 800)
 	if person_found == 0:
+		print("no one found, verifying exit...")
 		await get_tree().create_timer(1.0).timeout #increase timeout later
 		if fish_instance != null:
-			fish_instance.queue_free()
-			fish_instance = null
+			Testglobal.fishleave = true
+			print("no one found, removing fish...")
+		else:
+			print("exit not verified, returning...")
 		return
 	else:
 		print ("person detected, verifying...")

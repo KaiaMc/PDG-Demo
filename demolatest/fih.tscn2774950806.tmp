@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ch6s8l8fk6mj0"]
+[gd_scene load_steps=12 format=3 uid="uid://ch6s8l8fk6mj0"]
 
 [ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_qsjtx"]
 [ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="2_hgq8g"]
 [ext_resource type="Script" uid="uid://b12cbivui3pck" path="res://fish_script.gd" id="2_srlfq"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_wofph"]
+[ext_resource type="PackedScene" uid="uid://mm0xhkhks2lf" path="res://wander.tscn" id="4_srlfq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srlfq"]
 radius = 133.36096
@@ -92,7 +93,6 @@ _data = {
 
 [node name="fih" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
-motion_mode = 1
 script = ExtResource("2_srlfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -120,3 +120,5 @@ reset_on_save = false
 libraries = {
 &"": SubResource("AnimationLibrary_pawmk")
 }
+
+[node name="Wander" parent="." instance=ExtResource("4_srlfq")]

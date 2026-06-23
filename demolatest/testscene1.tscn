@@ -1,12 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://hp05wc0souge"]
+[gd_scene load_steps=9 format=3 uid="uid://hp05wc0souge"]
 
 [ext_resource type="Script" uid="uid://dv2tku3p8d4ok" path="res://testsceneSCRIPT.gd" id="1_0i7dp"]
 [ext_resource type="Script" uid="uid://xi7uy8bnjk3a" path="res://addons/godOSC/scripts/OSCClient.gd" id="2_cp4ok"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="3_3i7tp"]
 [ext_resource type="Texture2D" uid="uid://54yobu228nx0" path="res://assets/underwater-seascape-illustration-deep-sea-silhouette-with-fish-and-coral-reef-undersea-landscape-for-illustration-background-or-wallpaper-vector.jpg" id="4_cp4ok"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp4ok"]
+size = Vector2(1957, 84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3i7tp"]
+size = Vector2(2497, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wi460"]
+size = Vector2(70.5, 1240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qwj0"]
+size = Vector2(79, 1286)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_0i7dp")
+
+[node name="WanderPoints" type="Node2D" parent="."]
+
+[node name="point1" type="Marker2D" parent="WanderPoints" groups=["wander_points"]]
+position = Vector2(153, 250)
+
+[node name="point2" type="Marker2D" parent="WanderPoints" groups=["wander_points"]]
+position = Vector2(1764, 483)
+
+[node name="point3" type="Marker2D" parent="WanderPoints" groups=["wander_points"]]
+position = Vector2(172, 858)
 
 [node name="OSCServer" type="Node" parent="."]
 script = ExtResource("3_3i7tp")
@@ -34,5 +57,30 @@ z_index = -1
 position = Vector2(961.00006, 539.00006)
 scale = Vector2(1.1470293, 1.1913265)
 texture = ExtResource("4_cp4ok")
+metadata/_edit_lock_ = true
+
+[node name="borders" type="Area2D" parent="."]
+position = Vector2(964, -1)
+metadata/_edit_lock_ = true
+
+[node name="top" type="CollisionShape2D" parent="borders"]
+position = Vector2(-5, 5)
+shape = SubResource("RectangleShape2D_cp4ok")
+metadata/_edit_lock_ = true
+
+[node name="bottom" type="CollisionShape2D" parent="borders"]
+position = Vector2(34, 1092)
+shape = SubResource("RectangleShape2D_3i7tp")
+metadata/_edit_lock_ = true
+
+[node name="left" type="CollisionShape2D" parent="borders"]
+position = Vector2(-986, 559)
+shape = SubResource("RectangleShape2D_wi460")
+metadata/_edit_lock_ = true
+
+[node name="right" type="CollisionShape2D" parent="borders"]
+position = Vector2(984, 525)
+shape = SubResource("RectangleShape2D_1qwj0")
+metadata/_edit_lock_ = true
 
 [connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]

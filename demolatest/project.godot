@@ -15,6 +15,10 @@ run/main_scene="uid://nqupygtbema1"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Testglobal="*res://testglobal.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -23,3 +27,8 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="demolatest"
+
+[physics]
+
+2d/physics_engine="GodotPhysics2D"
+2d/default_gravity=-101.62800000000016
