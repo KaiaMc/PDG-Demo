@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://ch6s8l8fk6mj0"]
 
-[ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_qsjtx"]
-[ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="2_hgq8g"]
-[ext_resource type="Script" uid="uid://b12cbivui3pck" path="res://fish_script.gd" id="2_srlfq"]
-[ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_wofph"]
+[ext_resource type="Script" uid="uid://b12cbivui3pck" path="res://scripts/tests/fish_script.gd" id="1_j3pwh"]
+[ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/tests/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="2_372ut"]
+[ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="3_gj4ib"]
+[ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="4_c7mxb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srlfq"]
 radius = 133.36096
@@ -93,7 +93,7 @@ _data = {
 [node name="fih" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 motion_mode = 1
-script = ExtResource("2_srlfq")
+script = ExtResource("1_j3pwh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6.6666675, 6.6666675)
@@ -101,14 +101,14 @@ rotation = 1.5721836
 shape = SubResource("CapsuleShape2D_srlfq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_qsjtx")
+texture = ExtResource("2_372ut")
 
 [node name="OSCServer" type="Node" parent="."]
-script = ExtResource("2_wofph")
+script = ExtResource("3_gj4ib")
 timecode_as_unix = true
 
 [node name="OSCReceiver" type="Node" parent="." node_paths=PackedStringArray("target_server")]
-script = ExtResource("2_hgq8g")
+script = ExtResource("4_c7mxb")
 target_server = NodePath("../OSCServer")
 osc_address = "/fih"
 parent_control_setting = 1

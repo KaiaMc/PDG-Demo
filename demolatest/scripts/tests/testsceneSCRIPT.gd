@@ -1,6 +1,6 @@
 extends Node2D
 
-const FISH = preload("res://fih.tscn")
+const FISH = preload("res://scenes/interactables/fih.tscn")
 
 var screen_width = 1920
 var screen_height = 1080
@@ -74,3 +74,7 @@ func PersonDetection():
 			fish_x_spawn, fish_y_spawn
 			)
 			
+
+
+func _on_button_pressed():
+	get_tree().quit()

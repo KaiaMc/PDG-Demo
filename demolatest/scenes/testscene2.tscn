@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwv3mh1inhc85"]
 
-[ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_uu65e"]
-[ext_resource type="Texture2D" uid="uid://54yobu228nx0" path="res://assets/underwater-seascape-illustration-deep-sea-silhouette-with-fish-and-coral-reef-undersea-landscape-for-illustration-background-or-wallpaper-vector.jpg" id="2_fni8s"]
+[ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/tests/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="1_ieqb3"]
+[ext_resource type="Texture2D" uid="uid://54yobu228nx0" path="res://assets/tests/underwater-seascape-illustration-deep-sea-silhouette-with-fish-and-coral-reef-undersea-landscape-for-illustration-background-or-wallpaper-vector.jpg" id="2_bw6jh"]
 
 [sub_resource type="Curve2D" id="Curve2D_y8tav"]
 _data = {
@@ -34,12 +34,12 @@ script = SubResource("GDScript_uu65e")
 z_index = 1
 rotation = -0.023420602
 scale = Vector2(0.5591244, 0.5591244)
-texture = ExtResource("1_uu65e")
+texture = ExtResource("1_ieqb3")
 
 [node name="bg" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0.82896286, 0.72476643, 0.807405, 1)
 position = Vector2(972.00006, 545)
 scale = Vector2(1.1489795, 1.1489795)
-texture = ExtResource("2_fni8s")
+texture = ExtResource("2_bw6jh")
 metadata/_edit_lock_ = true
