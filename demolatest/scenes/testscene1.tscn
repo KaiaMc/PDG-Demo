@@ -84,10 +84,10 @@ shape = SubResource("RectangleShape2D_1qwj0")
 metadata/_edit_lock_ = true
 
 [node name="quit" type="Button" parent="."]
-offset_left = 1794.0
-offset_top = 980.0
-offset_right = 1877.0
-offset_bottom = 1016.0
+offset_left = 1757.0
+offset_top = 981.0
+offset_right = 1889.0
+offset_bottom = 1038.0
 theme_override_colors/font_color = Color(0.30980393, 0.8745098, 0.58431375, 1)
 text = "close"
 

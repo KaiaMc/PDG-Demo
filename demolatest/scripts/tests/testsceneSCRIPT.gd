@@ -37,6 +37,7 @@ func PersonDetection():
 	if person_found == 1 and fish_instance != null:
 		print("fish already spawned, returning...")
 		return
+
 	print("running person detection...")
 	fish_y_spawn = rng.randf_range(200, 800)
 	if person_found == 0:
@@ -65,8 +66,6 @@ func PersonDetection():
 				fish_x_spawn = 10 #off screen to LEFT
 			else:
 				fish_x_spawn = 1920 #off screen to RIGHT
-			
-			#fish_y_spawn = rng.randf_range(200, 800)
 			
 			fish_instance.global_position = Vector2(
 			#person_x * viewport_size.x, fish_y_spawn
