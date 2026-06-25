@@ -52,7 +52,7 @@ func fish_wander():
 
 func fish_leave():
 	print("running fish leave")
-	if get_parent().person_x * get_parent().viewport_size.x <= 960:
+	if get_parent().person_x * get_parent().viewport_size.x >= 960:
 		x_location = 2000 #off screen to RIGHT
 	else:
 		x_location = -500 #off screen to LEFT
