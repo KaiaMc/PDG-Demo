@@ -69,9 +69,9 @@ func PersonDetection():
 				fish_x_spawn = 1920 #off screen to RIGHT
 			
 			fish_instance.global_position = Vector3(
-			#person_x * viewport_size.x, fish_y_spawn
+			0, 0, 0 
 			#use below for actual setup !! above demonstrating only
-			0, 0, 0
+			#fish_x_spawn, fish_y_spawn, uhhh something for the z?
 			)
 			
 
