@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://lxujufb5xddl"]
 
-[ext_resource type="Script" uid="uid://dr74ehojjvvum" path="res://scripts/Fish.gd" id="1_qwnap"]
+[ext_resource type="Script" uid="uid://dr74ehojjvvum" path="res://scripts/fish.gd" id="1_qwnap"]
 [ext_resource type="PackedScene" uid="uid://dbavhlirv36ha" path="res://assets/fishtest.glb" id="1_tl2ac"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_6l5of"]
 [ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="3_qwnap"]
