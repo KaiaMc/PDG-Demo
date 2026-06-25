@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://lxujufb5xddl"]
+[gd_scene load_steps=5 format=3 uid="uid://lxujufb5xddl"]
 
+[ext_resource type="Script" uid="uid://dr74ehojjvvum" path="res://scripts/Fish.gd" id="1_qwnap"]
 [ext_resource type="PackedScene" uid="uid://dbavhlirv36ha" path="res://assets/fishtest.glb" id="1_tl2ac"]
+[ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_6l5of"]
+[ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="3_qwnap"]
 
-[node name="Node3D" type="Node3D"]
+[node name="FISH" type="Node3D"]
+script = ExtResource("1_qwnap")
 
-[node name="fishtest" parent="." instance=ExtResource("1_tl2ac")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4162823, 0, 0.11165714)
+[node name="Model" parent="." instance=ExtResource("1_tl2ac")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="OSCServer" type="Node" parent="."]
+script = ExtResource("2_6l5of")
+timecode_as_unix = true
+
+[node name="OSCReceiver" type="Node" parent="." node_paths=PackedStringArray("target_server")]
+script = ExtResource("3_qwnap")
+target_server = NodePath("../OSCServer")
+osc_address = "/fih"

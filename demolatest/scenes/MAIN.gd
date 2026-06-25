@@ -1,6 +1,6 @@
-extends Node2D
+extends Node3D
 
-const FISH = preload("res://scenes/interactables/fih.tscn")
+const FISH = preload("res://scenes/interactables/3Dfish.tscn")
 
 var screen_width = 1920
 var screen_height = 1080
@@ -68,10 +68,10 @@ func PersonDetection():
 			else:
 				fish_x_spawn = 1920 #off screen to RIGHT
 			
-			fish_instance.global_position = Vector2(
+			fish_instance.global_position = Vector3(
 			#person_x * viewport_size.x, fish_y_spawn
 			#use below for actual setup !! above demonstrating only
-			fish_x_spawn, fish_y_spawn
+			0, 0, 0
 			)
 			
 

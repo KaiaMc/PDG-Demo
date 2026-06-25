@@ -1,8 +1,7 @@
-extends CharacterBody2D
-@onready var fih = $"."
-@onready var animation_player = $AnimationPlayer
+extends Node3D
+
 @onready var wander_points = get_parent().get_node("WanderPoints").get_children()
-@export var wander_direction : Node2D
+@export var wander_direction : Node3D
 @export var swim_speed := 100.0
 
 var x_location
@@ -12,7 +11,6 @@ var direction := 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animation_player.play("hello")
 	x_location = get_parent().person_x * get_parent().viewport_size.x
 	y_location = get_parent().fish_y_spawn
 	var enterTween = get_tree().create_tween()
