@@ -1,6 +1,10 @@
 extends Node3D
 
 const FISH = preload("res://scenes/interactables/3Dfish.tscn")
+@onready var camera = $Camera3D
+@onready var random_fish = $RandomFish
+@onready var fish_school = $FishSchool
+@onready var timer = $Timer
 
 var screen_width = 1920
 var screen_height = 1080
@@ -19,6 +23,10 @@ var fish_y_spawn = 100
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewport_size = get_viewport().get_visible_rect().size
+
+func screen_to_world(screen_pos: Vector2) -> Vector3:
+	var world_pos = camera.project_position(screen_pos, 0.0)
+	return world_pos
 
 func _on_osc_server_message_received(address, value, time):
 	if address == "/detection":
@@ -40,7 +48,14 @@ func PersonDetection():
 		return
 
 	print("running person detection...")
-	fish_y_spawn = rng.randf_range(200, 800)
+
+	var top_world = screen_to_world(Vector2(0, 0))
+	var bottom_world = screen_to_world(Vector2(0, viewport_size.y))
+	fish_y_spawn = rng.randf_range(
+		bottom_world.y,
+		top_world.y
+	)
+
 	if person_found == 0:
 		print("no one found!")
 		await get_tree().create_timer(1.0).timeout #increase timeout later
@@ -62,19 +77,56 @@ func PersonDetection():
 				fish_instance = FISH.instantiate()
 				add_child(fish_instance)
 			
-			# USE FOR FINAL FISH SPAWNING, COMMENTED OUT FOR DEMONSTRATING
-			if person_x * viewport_size.x <= 960:
-				fish_x_spawn = 10 #off screen to LEFT
+			var left_world = screen_to_world(Vector2(0, viewport_size.y / 2))
+			var right_world = screen_to_world(Vector2(viewport_size.x, viewport_size.y / 2))
+			if person_x * viewport_size.x <= viewport_size.x / 2:
+				fish_x_spawn = left_world.x - 2.0
 			else:
-				fish_x_spawn = 1920 #off screen to RIGHT
+				fish_x_spawn = right_world.x + 2.0
 			
 			fish_instance.global_position = Vector3(
-			0, 0, 0 
+			#0, 0, 0 
 			#use below for actual setup !! above demonstrating only
-			#fish_x_spawn, fish_y_spawn, uhhh something for the z?
+			fish_x_spawn, fish_y_spawn, 0
 			)
 			
 
 
 func _on_button_pressed():
 	get_tree().quit()
+
+
+func _on_timer_timeout():
+	var spawnchance = rng.randi_range(1, 10)
+	if spawnchance <= 4:
+		await run_school_tween()
+	elif spawnchance >= 7:
+		await run_random_fish_tween()
+	else:
+		print("no fish!")
+	
+func run_school_tween():
+	var original_pos = fish_school.position
+	var tween = get_tree().create_tween()
+	tween.tween_property(
+		fish_school,
+		"position",
+		Vector3(39, original_pos.y, original_pos.z),
+		6.0
+	)
+	await tween.finished
+	fish_school.position = original_pos
+	timer.start()
+
+func run_random_fish_tween():
+	var original_pos = random_fish.position
+	var tween = get_tree().create_tween()
+	tween.tween_property(
+		random_fish,
+		"position",
+		Vector3(-150, original_pos.y, original_pos.z),
+		11.0
+	)
+	await tween.finished
+	random_fish.position = original_pos
+	timer.start()

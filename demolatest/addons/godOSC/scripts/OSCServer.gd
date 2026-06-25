@@ -187,7 +187,7 @@ func parse_bundle(packet: PackedByteArray):
 					vals.append(args)
 				
 				
-		print(address, " ", vals)
+		#print(address, " ", vals)
 		incoming_messages[address] = vals
 		
 		if !timecode_as_unix:
