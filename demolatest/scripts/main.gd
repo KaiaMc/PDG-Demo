@@ -19,7 +19,6 @@ var person_found = 0
 var fish_instance = null
 var fish_x_spawn = 100
 var fish_y_spawn = 100
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewport_size = get_viewport().get_visible_rect().size
@@ -52,8 +51,8 @@ func PersonDetection():
 	var top_world = screen_to_world(Vector2(0, 0))
 	var bottom_world = screen_to_world(Vector2(0, viewport_size.y))
 	fish_y_spawn = rng.randf_range(
-		bottom_world.y,
-		top_world.y
+		bottom_world.y + 5,
+		top_world.y -5
 	)
 
 	if person_found == 0:
@@ -104,6 +103,7 @@ func _on_timer_timeout():
 		await run_random_fish_tween()
 	else:
 		print("no fish!")
+		timer.start()
 	
 func run_school_tween():
 	var original_pos = fish_school.position
