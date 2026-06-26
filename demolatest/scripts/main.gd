@@ -32,6 +32,9 @@ func _on_osc_server_message_received(address, value, time):
 		person_found = value[0]
 		PersonDetection()
 	if address == "/nose:x":
+		#change to detect a variable and not the signal
+		#send msg recived to a bool, and then detect when that bool changes
+		#should fix the non detection when ur in frame already
 		person_x = value[0]
 
 func _process(delta):

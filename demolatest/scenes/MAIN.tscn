@@ -7,12 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/tests/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="5_dfr2a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfr2a"]
-albedo_color = Color(0.5254902, 1, 1, 1)
 albedo_texture = ExtResource("4_dfr2a")
 albedo_texture_force_srgb = true
 emission_enabled = true
-emission = Color(0.0030786458, 0.012316471, 0.024633896, 1)
-emission_energy_multiplier = 7.8
+emission = Color(0.0066586444, 0.01968588, 0.03819027, 1)
+emission_energy_multiplier = 15.71
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apk53"]
 emission_enabled = true
