@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqcmoel1rm1pw"]
+
+[ext_resource type="PackedScene" uid="uid://dwklg6dx6u2oq" path="res://assets/rock.glb" id="1_wy0yv"]
+[ext_resource type="Material" uid="uid://b51vs6hi1y3g0" path="res://textures/Outline.tres" id="2_sdgva"]
+
+[node name="rock" instance=ExtResource("1_wy0yv")]
+
+[node name="Icosphere_001" parent="." index="0"]
+material_overlay = ExtResource("2_sdgva")

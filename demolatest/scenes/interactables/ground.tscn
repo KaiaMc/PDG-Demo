@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://baosbqvioje8g"]
+
+[ext_resource type="PackedScene" uid="uid://5ujiqit6l3gh" path="res://assets/ground.glb" id="1_g8ea4"]
+[ext_resource type="Material" uid="uid://cpdpmcmrpgp0g" path="res://assets/GroundTexture.tres" id="2_g8ea4"]
+
+[node name="ground" instance=ExtResource("1_g8ea4")]
+
+[node name="GroundPlane" parent="." index="0"]
+transform = Transform3D(-6.2245533e-07, 8.19478e-08, 28.760841, 1.8747472, 14.240118, 0, -14.240118, 1.8747472, -1.2571763e-06, 0, 0.2719753, 0)
+surface_material_override/0 = ExtResource("2_g8ea4")
