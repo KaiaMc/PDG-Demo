@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="demolatest"
-run/main_scene="uid://hp05wc0souge"
+run/main_scene="uid://3ktnm62nxt42"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

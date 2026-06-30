@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cofvtj85u5uok"]
+
+[ext_resource type="PackedScene" uid="uid://bqyu0xwgludla" path="res://assets/greenPlant.glb" id="1_cgsrq"]
+[ext_resource type="Material" uid="uid://cpssore3k3ruw" path="res://textures/Painterly leaves.tres" id="2_x7nmg"]
+
+[node name="greenPlant" instance=ExtResource("1_cgsrq")]
+
+[node name="LeafyPlant" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_x7nmg")

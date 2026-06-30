@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://3ktnm62nxt42"]
+[gd_scene load_steps=14 format=3 uid="uid://3ktnm62nxt42"]
 
 [ext_resource type="Script" uid="uid://dwmlo3fci1jhl" path="res://scripts/main.gd" id="1_08hpn"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_imghw"]
 [ext_resource type="Script" uid="uid://xi7uy8bnjk3a" path="res://addons/godOSC/scripts/OSCClient.gd" id="3_dfr2a"]
 [ext_resource type="Texture2D" uid="uid://bxxg2e4rclwqt" path="res://assets/tests/pexels-jess-vide-5007946.jpg" id="4_dfr2a"]
 [ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/tests/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="5_dfr2a"]
+[ext_resource type="PackedScene" uid="uid://dqcmoel1rm1pw" path="res://scenes/interactables/rock.tscn" id="7_0xo7i"]
+[ext_resource type="PackedScene" uid="uid://baosbqvioje8g" path="res://scenes/interactables/ground.tscn" id="7_ligcy"]
+[ext_resource type="PackedScene" uid="uid://bqyu0xwgludla" path="res://assets/greenPlant.glb" id="8_ligcy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfr2a"]
 albedo_texture = ExtResource("4_dfr2a")
@@ -48,10 +51,10 @@ script = ExtResource("3_dfr2a")
 port = 4848
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.457058)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6920128, 2.1992798, 10.457058)
 projection = 1
 fov = 90.4
-size = 35.0
+size = 30.062
 
 [node name="Temp-BG" type="MeshInstance3D" parent="."]
 transform = Transform3D(34.813, 0, -2.3132066e-06, 0, 19.105, 0, 6.0868983e-06, 0, 13.23, -0.69148254, 0.15385437, -5.6129227)
@@ -156,6 +159,15 @@ skeleton = NodePath("../../DirectionalLight3D")
 wait_time = 6.7
 one_shot = true
 autostart = true
+
+[node name="ground" parent="." instance=ExtResource("7_ligcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6331787, -11.675629, 0.019165039)
+
+[node name="rock" parent="." instance=ExtResource("7_0xo7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -11.033386, 0)
+
+[node name="greenPlant" parent="." instance=ExtResource("8_ligcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.883125, -13, -16.466187)
 
 [connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
