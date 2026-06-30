@@ -28,10 +28,10 @@ func _on_osc_server_message_received(address, value, time):
 		person_x = value[0]
 
 func _process(delta):
-	if Testglobal.fishgone == true:
+	if Global.fishgone == true:
 		fish_instance.queue_free()
 		fish_instance = null
-		Testglobal.fishgone = false
+		Global.fishgone = false
 		print("fish deleted")
 
 func PersonDetection():
@@ -45,7 +45,7 @@ func PersonDetection():
 		print("no one found!")
 		await get_tree().create_timer(1.0).timeout #increase timeout later
 		if fish_instance != null and person_found == 0:
-			Testglobal.fishleave = true
+			Global.fishleave = true
 			print("no one found, removing fish...")
 		else:
 			print("exit not verified, returning...")

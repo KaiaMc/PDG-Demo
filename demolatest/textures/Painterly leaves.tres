@@ -1,11 +1,9 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cpssore3k3ruw"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cpssore3k3ruw"]
 
 [ext_resource type="Texture2D" uid="uid://bp8ygtila41df" path="res://textures/greenPlantTexture.png" id="1_1hqwf"]
-[ext_resource type="Material" uid="uid://b51vs6hi1y3g0" path="res://textures/Outline.tres" id="2_fpvpk"]
 
 [resource]
 resource_name = "Painterly leaves"
-next_pass = ExtResource("2_fpvpk")
 cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("1_1hqwf")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvsbar7x1tdmq"]
+
+[ext_resource type="PackedScene" uid="uid://dtjribfvau2ds" path="res://assets/flatPlant.glb" id="1_kgve1"]
+[ext_resource type="Material" path="res://textures/FlatPlantTexture.tres" id="2_66m2p"]
+
+[node name="flatPlant" instance=ExtResource("1_kgve1")]
+
+[node name="Plane_004" parent="Armature_002/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_66m2p")
