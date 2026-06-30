@@ -60,9 +60,11 @@ mesh = SubResource("PlaneMesh_08hpn")
 skeleton = NodePath("../Camera3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.650984, 0)
-light_color = Color(1, 1, 0.6, 1)
-light_energy = 0.2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.757696, 0)
+light_color = Color(1, 0.7176471, 0.6, 1)
+light_energy = 2.479
+light_indirect_energy = 4.629
+light_specular = 0.0
 
 [node name="WanderPoints" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.838095, 10.5727215, 0)
