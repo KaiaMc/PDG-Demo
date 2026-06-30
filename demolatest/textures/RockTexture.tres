@@ -1,8 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://k3s3i41vw4rj"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ds1clwfj6ws1"]
 
-[ext_resource type="Texture2D" uid="uid://cy7fkgvptnudw" path="res://assets/rock_RockTexture.png" id="1_hknqv"]
+[ext_resource type="Texture2D" uid="uid://c72ovpjirfc7f" path="res://textures/rock_RockTexture.png" id="1_1m53s"]
+[ext_resource type="Texture2D" uid="uid://spphcmi7lkmd" path="res://textures/rock_Paint-Brush_normal.png" id="2_4amri"]
 
 [resource]
 resource_name = "RockTexture"
 cull_mode = 2
-albedo_texture = ExtResource("1_hknqv")
+albedo_texture = ExtResource("1_1m53s")
+metallic_texture = ExtResource("2_4amri")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_4amri")
+roughness_texture_channel = 1

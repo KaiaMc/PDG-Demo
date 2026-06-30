@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dwklg6dx6u2oq"
+uid="uid://cisrhf5ujtnb2"
 path="res://.godot/imported/rock.glb-d594aeca529c0c54c623e265d40764ba.scn"
 
 [deps]
@@ -36,7 +36,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 materials/extract=1
 materials/extract_format=0
-materials/extract_path="res://textures"
+materials/extract_path=""
 _subresources={}
 gltf/naming_version=2
 gltf/embedded_image_handling=1
