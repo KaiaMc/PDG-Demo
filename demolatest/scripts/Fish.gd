@@ -19,12 +19,8 @@ func _ready():
 	)
 	x_location = world_pos.x
 	y_location = get_parent().fish_y_spawn
-	if Global.spawnleft == true: 
-		rotation.x = deg_to_rad(90) 
-		Global.spawnleft = false 
-	if Global.spawnright == true: 
-		rotation.x = deg_to_rad(-90) 
-		Global.spawnright = false
+	
+	print(rotation_degrees)
 	
 	var enterTween = get_tree().create_tween()
 	enterTween.tween_property(self, "position", Vector3(x_location, y_location, 0), 4.0)
@@ -35,6 +31,12 @@ func _process(delta):
 	if Global.fishleave == true:
 		fish_leave()
 		Global.fishleave = false
+	if Global.spawnleft == true: 
+		rotation.y = deg_to_rad(0) 
+		Global.spawnleft = false 
+	if Global.spawnright == true: 
+		rotation.y = deg_to_rad(-180) 
+		Global.spawnright = false
 
 func face_target(target: Vector3): 
 	var move_direction = target - global_position 
@@ -49,9 +51,9 @@ func fish_wander():
 		var point = wander_points[current_point]
 		face_target(point.global_position)
 		if point.global_position.x < global_position.x: 
-			rotation.y = deg_to_rad(270) 
+			rotation.z = deg_to_rad(270) 
 		else: 
-			rotation.y = deg_to_rad(90)
+			rotation.z = deg_to_rad(90)
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed
 		var wandertween = get_tree().create_tween()
@@ -70,6 +72,7 @@ func fish_wander():
 
 func fish_leave():
 	print("running fish leave")
+	rotation.z = deg_to_rad(0)
 	var left_world = get_parent().screen_to_world(
 		Vector2(0, get_parent().viewport_size.y / 2)
 	)
@@ -79,18 +82,15 @@ func fish_leave():
 
 	if get_parent().person_x * get_parent().viewport_size.x >= get_parent().viewport_size.x / 2:
 		x_location = right_world.x + 2.0
+		Global.spawnleft = true
 	else:
 		x_location = left_world.x - 2.0
+		Global.spawnright = true
 	
 	var leaveTween = get_tree().create_tween()
 	print("making tween")
 	y_location = self.global_position.y
-	leaveTween.tween_property(
-		self,
-		"global_position",
-		Vector3(x_location, y_location, global_position.z),
-		4
-	)
+	leaveTween.tween_property(self, "global_position", Vector3(x_location, y_location, global_position.z),4)
 	await leaveTween.finished
 	print("finished tween")
 	Global.fishgone = true
