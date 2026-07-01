@@ -36,6 +36,9 @@ func _on_osc_server_message_received(address, value, time):
 		#send msg recived to a bool, and then detect when that bool changes
 		#should fix the non detection when ur in frame already
 		person_x = value[0]
+	if address == "/wave":
+		#print("wave detected") (working)
+		pass
 
 func _process(delta):
 	if Global.fishgone == true:

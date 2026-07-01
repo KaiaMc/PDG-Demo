@@ -37,6 +37,8 @@ func _process(delta):
 		Global.spawnright = false
 
 func face_target(target: Vector3): 
+	# animation_player.play("turn")
+	# await animation_player.finished ? idk if this will work
 	var move_direction = target - global_position 
 	if move_direction.x < 0: 
 		rotation.y = deg_to_rad(-180) 
@@ -47,7 +49,7 @@ func face_target(target: Vector3):
 func fish_wander():
 	while Global.fishleave == false:
 		var point = wander_points[current_point]
-		var rotationdeg = atan2(point.global_position.y, abs(point.global_position.x))
+		var rotationdeg = atan2(abs(point.global_position.y), abs(point.global_position.x))
 
 		face_target(point.global_position)
 		if point.global_position.y < global_position.y: 
