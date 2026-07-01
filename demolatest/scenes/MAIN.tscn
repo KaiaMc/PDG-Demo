@@ -95,7 +95,7 @@ mesh = SubResource("QuadMesh_0xo7i")
 skeleton = NodePath("../../DirectionalLight3D")
 
 [node name="FishSchool" type="Node3D" parent="."]
-transform = Transform3D(3.195, 0, 0, 0, 3.195, 0, 0, 0, 3.195, -51.891632, -13.051851, -4.8329725)
+transform = Transform3D(3.195, 0, 0, 0, 3.195, 0, 0, 0, 3.195, -51.891632, -6.511121, -4.8329725)
 
 [node name="1" type="MeshInstance3D" parent="FishSchool"]
 transform = Transform3D(1.615, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

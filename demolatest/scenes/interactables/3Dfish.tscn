@@ -93,7 +93,6 @@ transform = Transform3D(1, 0, 0, 0, 0.02533935, -0.9996789, 0, 0.9996789, 0.0253
 libraries = {
 &"": SubResource("AnimationLibrary_4rvf2")
 }
-speed_scale = 1.5
 
 [node name="OSCServer" type="Node" parent="." index="3"]
 script = ExtResource("2_6l5of")

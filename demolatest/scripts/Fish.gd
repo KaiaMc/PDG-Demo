@@ -41,9 +41,11 @@ func _process(delta):
 func face_target(target: Vector3): 
 	var move_direction = target - global_position 
 	if move_direction.x < 0: 
-		rotation.x = -atan2(move_direction.y, abs(move_direction.x)) 
+		#rotation.y = -atan2(move_direction.y, abs(move_direction.x)) 
+		rotation.y = deg_to_rad(-180) 
 	else: 
-		rotation.x = atan2(move_direction.y, abs(move_direction.x))
+		#rotation.y = atan2(move_direction.y, abs(move_direction.x))
+		rotation.y = deg_to_rad(0) 
 
 #fish idle stuff
 func fish_wander():
@@ -51,9 +53,9 @@ func fish_wander():
 		var point = wander_points[current_point]
 		face_target(point.global_position)
 		if point.global_position.x < global_position.x: 
-			rotation.z = deg_to_rad(270) 
+			rotation.z = atan2(point.global_position.y, abs(point.global_position.x))
 		else: 
-			rotation.z = deg_to_rad(90)
+			rotation.z = -atan2(point.global_position.y, abs(point.global_position.x))
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed
 		var wandertween = get_tree().create_tween()
