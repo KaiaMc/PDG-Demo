@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhsc5n2bmahag"]
+
+[ext_resource type="Shader" uid="uid://ulqsurg4hu0p" path="res://scenes/bubbleparticles.gdshader" id="1_6chq7"]
+
+[sub_resource type="Curve" id="Curve_ys27l"]
+_data = [Vector2(0.015151501, 0.3370787), 0.0, 0.0, 0, 0, Vector2(1, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6chq7"]
+curve = SubResource("Curve_ys27l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t1eea"]
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1.06, 5.455, 1)
+gravity = Vector3(0, 1.99, 0)
+scale_curve = SubResource("CurveTexture_6chq7")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6chq7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t1eea"]
+noise = SubResource("FastNoiseLite_6chq7")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e7xf8"]
+noise = SubResource("FastNoiseLite_6chq7")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_30msh"]
+noise = SubResource("FastNoiseLite_6chq7")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7xf8"]
+render_priority = 0
+shader = ExtResource("1_6chq7")
+shader_parameter/distortionView = 0.0249999994412
+shader_parameter/speedView = 0.04499999899416
+shader_parameter/noiseViewX = SubResource("NoiseTexture2D_e7xf8")
+shader_parameter/noiseViewY = SubResource("NoiseTexture2D_30msh")
+shader_parameter/tintColor = Color(0.82586014, 0.9016312, 0.9337001, 1)
+shader_parameter/fesnelAmount = 3.10000004619372
+shader_parameter/distortionVertex = 0.03999999910592
+shader_parameter/speedVertex = 0.0
+shader_parameter/noiseVertex = SubResource("NoiseTexture2D_t1eea")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30msh"]
+next_pass = SubResource("ShaderMaterial_e7xf8")
+transparency = 1
+albedo_color = Color(0.6117647, 1, 1, 0.0627451)
+emission_enabled = true
+emission = Color(0.8099233, 0.84309965, 0.8554902, 1)
+emission_energy_multiplier = 0.95
+
+[sub_resource type="SphereMesh" id="SphereMesh_ycc0s"]
+material = SubResource("StandardMaterial3D_30msh")
+
+[node name="Bubbleparticles" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 23
+lifetime = 1.97
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_t1eea")
+draw_pass_1 = SubResource("SphereMesh_ycc0s")
