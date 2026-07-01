@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3ktnm62nxt42"]
+[gd_scene load_steps=16 format=3 uid="uid://3ktnm62nxt42"]
 
 [ext_resource type="Script" uid="uid://dwmlo3fci1jhl" path="res://scripts/main.gd" id="1_08hpn"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_imghw"]
@@ -7,14 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dr65xy4slyb4h" path="res://assets/tests/0-7944_fish-kids-clip-art-pink-cartoon-educational-cute-fish-cartoon-transparent-background-removebg-preview.png" id="5_dfr2a"]
 [ext_resource type="PackedScene" uid="uid://dqcmoel1rm1pw" path="res://scenes/interactables/rock.tscn" id="7_0xo7i"]
 [ext_resource type="PackedScene" uid="uid://baosbqvioje8g" path="res://scenes/interactables/ground.tscn" id="7_ligcy"]
-[ext_resource type="PackedScene" uid="uid://bqyu0xwgludla" path="res://assets/greenPlant.glb" id="8_ligcy"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfr2a"]
-albedo_texture = ExtResource("4_dfr2a")
-albedo_texture_force_srgb = true
-emission_enabled = true
-emission = Color(0.0066586444, 0.01968588, 0.03819027, 1)
-emission_energy_multiplier = 15.71
+[ext_resource type="PackedScene" uid="uid://cwhj3eulnfhk8" path="res://assets/greenPlant.glb" id="8_ligcy"]
+[ext_resource type="AudioStream" uid="uid://caimev42k5l7m" path="res://assets/sounds/Ambient Example.wav" id="9_jgwaj"]
+[ext_resource type="PackedScene" uid="uid://cvsbar7x1tdmq" path="res://scenes/interactables/flat_plant.tscn" id="10_jgwaj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apk53"]
 emission_enabled = true
@@ -24,6 +19,9 @@ emission_energy_multiplier = 2.08
 [sub_resource type="PlaneMesh" id="PlaneMesh_08hpn"]
 material = SubResource("StandardMaterial3D_apk53")
 orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgwaj"]
+albedo_texture = ExtResource("4_dfr2a")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rl6xj"]
 transparency = 1
@@ -58,15 +56,12 @@ size = 30.062
 
 [node name="Temp-BG" type="MeshInstance3D" parent="."]
 transform = Transform3D(34.813, 0, -2.3132066e-06, 0, 19.105, 0, 6.0868983e-06, 0, 13.23, -0.69148254, 0.15385437, -5.6129227)
-material_override = SubResource("StandardMaterial3D_dfr2a")
 mesh = SubResource("PlaneMesh_08hpn")
 skeleton = NodePath("../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_jgwaj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.757696, 0)
-light_color = Color(1, 0.7176471, 0.6, 1)
-light_energy = 2.479
-light_indirect_energy = 4.629
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18317223, 33.881844)
 light_specular = 0.0
 
 [node name="WanderPoints" type="Node3D" parent="."]
@@ -77,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7249966, -4.021209, 0)
 gizmo_extents = 0.55
 
 [node name="2" type="Marker3D" parent="WanderPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.23024, -3.5037508, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.23024, -1.6380997, 0)
 gizmo_extents = 0.55
 
 [node name="3" type="Marker3D" parent="WanderPoints"]
@@ -99,7 +94,7 @@ mesh = SubResource("QuadMesh_0xo7i")
 skeleton = NodePath("../../DirectionalLight3D")
 
 [node name="FishSchool" type="Node3D" parent="."]
-transform = Transform3D(3.195, 0, 0, 0, 3.195, 0, 0, 0, 3.195, -51.891632, -13.051851, -4.8329725)
+transform = Transform3D(3.195, 0, 0, 0, 3.195, 0, 0, 0, 3.195, -51.891632, -6.511121, -4.8329725)
 
 [node name="1" type="MeshInstance3D" parent="FishSchool"]
 transform = Transform3D(1.615, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -164,10 +159,18 @@ autostart = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6331787, -11.675629, 0.019165039)
 
 [node name="rock" parent="." instance=ExtResource("7_0xo7i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -11.033386, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.640465, -8.741278, 2.6)
 
 [node name="greenPlant" parent="." instance=ExtResource("8_ligcy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.883125, -13, -16.466187)
+transform = Transform3D(-0.3029891, -0.028144306, -0.9525783, 0.060975656, 0.99694306, -0.04884977, 0.9510413, -0.07288503, -0.3003468, 17.680483, -6.900899, 3.831)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_jgwaj")
+volume_db = -20.0
+autoplay = true
+
+[node name="flatPlant" parent="." instance=ExtResource("10_jgwaj")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 22.468088, -12.387, -0.805)
 
 [connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

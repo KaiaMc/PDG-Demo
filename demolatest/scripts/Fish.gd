@@ -19,33 +19,44 @@ func _ready():
 	)
 	x_location = world_pos.x
 	y_location = get_parent().fish_y_spawn
+	
 	var enterTween = get_tree().create_tween()
-	enterTween.tween_property(self, "position", Vector3(x_location, y_location, 0), 3.0)
+	enterTween.tween_property(self, "position", Vector3(x_location, y_location, 0), 4.0)
 	await enterTween.finished
 	fish_wander()
 
 func _process(delta):
-	if Testglobal.fishleave == true:
+	if Global.fishleave == true:
 		fish_leave()
-		Testglobal.fishleave = false
+		Global.fishleave = false
+	if Global.spawnleft == true: 
+		rotation.y = deg_to_rad(0) 
+		Global.spawnleft = false 
+	if Global.spawnright == true: 
+		rotation.y = deg_to_rad(-180) 
+		Global.spawnright = false
 
-func face_target(target: Vector3):
-	var move_direction = target - global_position
-
-	if move_direction.x < 0:
-		rotation.x = -atan2(move_direction.y, abs(move_direction.x))
-	else:
-		rotation.x = atan2(move_direction.y, abs(move_direction.x))
+func face_target(target: Vector3): 
+	var move_direction = target - global_position 
+	if move_direction.x < 0: 
+		rotation.y = deg_to_rad(-180) 
+	else: 
+		rotation.y = deg_to_rad(0) 
 
 #fish idle stuff
 func fish_wander():
-	while Testglobal.fishleave == false:
+	while Global.fishleave == false:
 		var point = wander_points[current_point]
+		var rotationdeg = atan2(point.global_position.y, abs(point.global_position.x))
+
 		face_target(point.global_position)
-		if point.global_position.x < global_position.x:
-			rotation.y = deg_to_rad(270)
-		else:
-			rotation.y = deg_to_rad(90)
+		if point.global_position.y < global_position.y: 
+			rotation.z = rotationdeg * -1 /4
+			print(rotationdeg)
+		else: 
+			rotation.z = rotationdeg /4
+			print(rotationdeg)
+
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed
 		var wandertween = get_tree().create_tween()
@@ -64,6 +75,7 @@ func fish_wander():
 
 func fish_leave():
 	print("running fish leave")
+	rotation.z = deg_to_rad(0)
 	var left_world = get_parent().screen_to_world(
 		Vector2(0, get_parent().viewport_size.y / 2)
 	)
@@ -73,18 +85,15 @@ func fish_leave():
 
 	if get_parent().person_x * get_parent().viewport_size.x >= get_parent().viewport_size.x / 2:
 		x_location = right_world.x + 2.0
+		Global.spawnleft = true
 	else:
 		x_location = left_world.x - 2.0
+		Global.spawnright = true
 	
 	var leaveTween = get_tree().create_tween()
 	print("making tween")
 	y_location = self.global_position.y
-	leaveTween.tween_property(
-		self,
-		"global_position",
-		Vector3(x_location, y_location, global_position.z),
-		4
-	)
+	leaveTween.tween_property(self, "global_position", Vector3(x_location, y_location, global_position.z),4)
 	await leaveTween.finished
 	print("finished tween")
-	Testglobal.fishgone = true
+	Global.fishgone = true

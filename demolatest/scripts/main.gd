@@ -38,10 +38,10 @@ func _on_osc_server_message_received(address, value, time):
 		person_x = value[0]
 
 func _process(delta):
-	if Testglobal.fishgone == true:
+	if Global.fishgone == true:
 		fish_instance.queue_free()
 		fish_instance = null
-		Testglobal.fishgone = false
+		Global.fishgone = false
 		print("fish deleted")
 
 func PersonDetection():
@@ -62,7 +62,7 @@ func PersonDetection():
 		print("no one found!")
 		await get_tree().create_timer(1.0).timeout #increase timeout later
 		if fish_instance != null and person_found == 0:
-			Testglobal.fishleave = true
+			Global.fishleave = true
 			print("no one found, removing fish...")
 		else:
 			print("exit not verified, returning...")
@@ -83,20 +83,18 @@ func PersonDetection():
 			var right_world = screen_to_world(Vector2(viewport_size.x, viewport_size.y / 2))
 			if person_x * viewport_size.x <= viewport_size.x / 2:
 				fish_x_spawn = left_world.x - 2.0
+				Global.spawnleft = true
 			else:
 				fish_x_spawn = right_world.x + 2.0
+				Global.spawnright = true
 			
 			fish_instance.global_position = Vector3(
-			#0, 0, 0 
-			#use below for actual setup !! above demonstrating only
 			fish_x_spawn, fish_y_spawn, 0
 			)
 			
 
-
 func _on_button_pressed():
 	get_tree().quit()
-
 
 func _on_timer_timeout():
 	var spawnchance = rng.randi_range(1, 10)

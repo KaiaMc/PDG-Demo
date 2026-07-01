@@ -21,13 +21,13 @@ func _ready():
 	fish_wander()
 
 func _process(delta):
-	if Testglobal.fishleave == true:
+	if Global.fishleave == true:
 		fish_leave()
-		Testglobal.fishleave = false
+		Global.fishleave = false
 
 #fish idle stuff
 func fish_wander():
-	while Testglobal.fishleave == false:
+	while Global.fishleave == false:
 		var point = wander_points[current_point]
 		if point.global_position.x < global_position.x:
 			scale.x = -0.3
@@ -63,4 +63,4 @@ func fish_leave():
 	leaveTween.tween_property(self, "global_position", Vector2(x_location, y_location), 5)
 	await leaveTween.finished
 	print("finished tween")
-	Testglobal.fishgone = true
+	Global.fishgone = true

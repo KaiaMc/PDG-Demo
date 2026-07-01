@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvsbar7x1tdmq"]
+
+[ext_resource type="PackedScene" uid="uid://dtjribfvau2ds" path="res://assets/flatPlant.glb" id="1_kgve1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgve1"]
+albedo_color = Color(0.10980392, 0.14901961, 0.14901961, 0.23921569)
+
+[node name="flatPlant" instance=ExtResource("1_kgve1")]
+
+[node name="Plane_004" parent="Armature_002/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_kgve1")
