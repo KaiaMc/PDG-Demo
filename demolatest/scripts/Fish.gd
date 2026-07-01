@@ -12,7 +12,7 @@ var direction := 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	animation_player.play("Armature")
+	animation_player.play("fishSwim")
 	var screen_x = get_parent().person_x * get_parent().viewport_size.x
 	var world_pos = get_parent().screen_to_world(
 		Vector2(screen_x, get_parent().viewport_size.y / 2)
@@ -30,20 +30,37 @@ func _process(delta):
 		fish_leave()
 		Global.fishleave = false
 	if Global.spawnleft == true: 
-		rotation.y = deg_to_rad(0) 
+		rotation.y = deg_to_rad(90) 
 		Global.spawnleft = false 
 	if Global.spawnright == true: 
-		rotation.y = deg_to_rad(-180) 
+		rotation.y = deg_to_rad(-270) 
 		Global.spawnright = false
 
 func face_target(target: Vector3): 
-	# animation_player.play("turn")
-	# await animation_player.finished ? idk if this will work
 	var move_direction = target - global_position 
 	if move_direction.x < 0: 
-		rotation.y = deg_to_rad(-180) 
+		print(rad_to_deg(rotation.y))
+		self.scale = Vector3(1, 1, 1)
+		self.rotation.z = deg_to_rad(0)
+		animation_player.play("FishTurnR")
+		print("playing right turn")
+		await animation_player.animation_finished
+		if rotation.y < 0:
+			rotation.y = deg_to_rad(180)
+		else:
+			pass
 	else: 
-		rotation.y = deg_to_rad(0) 
+		print(self.rotation)
+		animation_player.play("FishTurnL")
+		print("playing left turn")
+		await animation_player.animation_finished
+		#turns
+		self.scale = Vector3(-1, -1, -1)
+		self.rotation.z = deg_to_rad(180)
+		if rotation.y > 0:
+			rotation.y = deg_to_rad(-270) 
+		else:
+			pass
 
 #fish idle stuff
 func fish_wander():
@@ -54,10 +71,10 @@ func fish_wander():
 		face_target(point.global_position)
 		if point.global_position.y < global_position.y: 
 			rotation.z = rotationdeg * -1 /4
-			print(rotationdeg)
+			#print(rotationdeg)
 		else: 
 			rotation.z = rotationdeg /4
-			print(rotationdeg)
+			#print(rotationdeg)
 
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed
