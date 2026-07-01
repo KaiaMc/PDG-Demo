@@ -1,12 +1,15 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b8o81g7a3yic"]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://b8o81g7a3yic"]
 
 [ext_resource type="Texture2D" uid="uid://b84klacqjn7um" path="res://textures/flatPlant_FlatPlantTexture.png" id="1_i58qh"]
 [ext_resource type="Texture2D" uid="uid://dbn42ep4ses8a" path="res://textures/flatPlant_Paint-Brush_normal_2.png" id="2_fckqn"]
 [ext_resource type="Texture2D" uid="uid://04b5h18bxakr" path="res://textures/flatPlant_Paint-Brush_normal.png" id="3_fg251"]
+[ext_resource type="Material" uid="uid://b51vs6hi1y3g0" path="res://textures/Outline.tres" id="3_s3118"]
 
 [resource]
 resource_name = "Painterly leaves.004"
+next_pass = ExtResource("3_s3118")
 cull_mode = 2
+albedo_color = Color(0.77512866, 0.7454368, 0.91431785, 1)
 albedo_texture = ExtResource("1_i58qh")
 metallic_texture = ExtResource("2_fckqn")
 metallic_texture_channel = 2

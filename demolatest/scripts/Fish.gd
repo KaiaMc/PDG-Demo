@@ -20,8 +20,6 @@ func _ready():
 	x_location = world_pos.x
 	y_location = get_parent().fish_y_spawn
 	
-	print(rotation_degrees)
-	
 	var enterTween = get_tree().create_tween()
 	enterTween.tween_property(self, "position", Vector3(x_location, y_location, 0), 4.0)
 	await enterTween.finished
@@ -41,21 +39,24 @@ func _process(delta):
 func face_target(target: Vector3): 
 	var move_direction = target - global_position 
 	if move_direction.x < 0: 
-		#rotation.y = -atan2(move_direction.y, abs(move_direction.x)) 
 		rotation.y = deg_to_rad(-180) 
 	else: 
-		#rotation.y = atan2(move_direction.y, abs(move_direction.x))
 		rotation.y = deg_to_rad(0) 
 
 #fish idle stuff
 func fish_wander():
 	while Global.fishleave == false:
 		var point = wander_points[current_point]
+		var rotationdeg = atan2(point.global_position.y, abs(point.global_position.x))
+
 		face_target(point.global_position)
-		if point.global_position.x < global_position.x: 
-			rotation.z = atan2(point.global_position.y, abs(point.global_position.x))
+		if point.global_position.y < global_position.y: 
+			rotation.z = rotationdeg * -1 /4
+			print(rotationdeg)
 		else: 
-			rotation.z = -atan2(point.global_position.y, abs(point.global_position.x))
+			rotation.z = rotationdeg /4
+			print(rotationdeg)
+
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed
 		var wandertween = get_tree().create_tween()

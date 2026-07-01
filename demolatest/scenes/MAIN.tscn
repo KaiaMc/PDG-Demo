@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://baosbqvioje8g" path="res://scenes/interactables/ground.tscn" id="7_ligcy"]
 [ext_resource type="PackedScene" uid="uid://cwhj3eulnfhk8" path="res://assets/greenPlant.glb" id="8_ligcy"]
 [ext_resource type="AudioStream" uid="uid://caimev42k5l7m" path="res://assets/sounds/Ambient Example.wav" id="9_jgwaj"]
-[ext_resource type="PackedScene" uid="uid://dtjribfvau2ds" path="res://assets/flatPlant.glb" id="9_re03l"]
+[ext_resource type="PackedScene" uid="uid://cvsbar7x1tdmq" path="res://scenes/interactables/flat_plant.tscn" id="10_jgwaj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apk53"]
 emission_enabled = true
@@ -62,7 +62,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jgwaj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18317223, 33.881844)
-light_energy = 1.41
 light_specular = 0.0
 
 [node name="WanderPoints" type="Node3D" parent="."]
@@ -73,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7249966, -4.021209, 0)
 gizmo_extents = 0.55
 
 [node name="2" type="Marker3D" parent="WanderPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.23024, -3.5037508, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.23024, -1.6380997, 0)
 gizmo_extents = 0.55
 
 [node name="3" type="Marker3D" parent="WanderPoints"]
@@ -165,13 +164,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.640465, -8.741278, 2.6)
 [node name="greenPlant" parent="." instance=ExtResource("8_ligcy")]
 transform = Transform3D(-0.3029891, -0.028144306, -0.9525783, 0.060975656, 0.99694306, -0.04884977, 0.9510413, -0.07288503, -0.3003468, 17.680483, -6.900899, 3.831)
 
-[node name="flatPlant" parent="." instance=ExtResource("9_re03l")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 23.592577, -13.67602, 6.1197205)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_jgwaj")
 volume_db = -20.0
 autoplay = true
+
+[node name="flatPlant" parent="." instance=ExtResource("10_jgwaj")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 22.468088, -12.387, -0.805)
 
 [connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
