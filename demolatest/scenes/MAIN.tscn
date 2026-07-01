@@ -87,14 +87,14 @@ gizmo_extents = 0.55
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.780733, 1.7873316, -4.8329725)
 
 [node name="10" type="MeshInstance3D" parent="RandomFish"]
-transform = Transform3D(-6.515, 3.1861533e-09, -6.0850476e-07, 0, 4.029945, 0.02110094, 9.837377e-07, 0.02110094, -4.029945, 71.94342, 2.2196646, 1.434)
+transform = Transform3D(-6.515, 3.1861533e-09, -6.0850476e-07, 0, 4.029945, 0.02110094, 9.837377e-07, 0.02110094, -4.029945, 71.94342, 6.8201294, 1.434)
 material_override = SubResource("StandardMaterial3D_rl6xj")
 transparency = 0.17
 mesh = SubResource("QuadMesh_0xo7i")
 skeleton = NodePath("../../DirectionalLight3D")
 
 [node name="FishSchool" type="Node3D" parent="."]
-transform = Transform3D(3.195, 0, 0, 0, 3.195, 0, 0, 0, 3.195, -51.891632, -6.511121, -4.8329725)
+transform = Transform3D(3.195, 0, 0, 0, 3.195, 0, 0, 0, 3.195, -51.891632, -2.7471046, -4.8329725)
 
 [node name="1" type="MeshInstance3D" parent="FishSchool"]
 transform = Transform3D(1.615, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
