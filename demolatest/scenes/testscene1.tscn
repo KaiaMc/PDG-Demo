@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://hp05wc0souge"]
 
-[ext_resource type="Script" uid="uid://dv2tku3p8d4ok" path="res://scripts/tests/TESTsceneSCRIPT.gd" id="1_d3n3q"]
+[ext_resource type="Script" uid="uid://dv2tku3p8d4ok" path="res://scripts/tests/testsceneSCRIPT.gd" id="1_d3n3q"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_1xocr"]
 [ext_resource type="Script" uid="uid://xi7uy8bnjk3a" path="res://addons/godOSC/scripts/OSCClient.gd" id="3_j1fj4"]
-[ext_resource type="Texture2D" uid="uid://54yobu228nx0" path="res://assets/tests/underwater-seascape-illustration-deep-sea-silhouette-with-fish-and-coral-reef-undersea-landscape-for-illustration-background-or-wallpaper-vector.jpg" id="4_nrfsy"]
+[ext_resource type="Texture2D" uid="uid://co75kcrtepgo7" path="res://assets/backgroundtest2.png" id="4_d3n3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cp4ok"]
 size = Vector2(1957, 84)
@@ -54,10 +54,9 @@ metadata/_edit_lock_ = true
 [node name="UnderwaterSeascapeIllustrationDeepSeaSilhouetteWithFishAndCoralReefUnderseaLandscapeForIllustrationBackgroundOrWallpaperVector" type="Sprite2D" parent="."]
 modulate = Color(0.40392157, 0.6745098, 0.6313726, 0.5019608)
 z_index = -1
-position = Vector2(961.00006, 539.00006)
-scale = Vector2(1.1470293, 1.1913265)
-texture = ExtResource("4_nrfsy")
-metadata/_edit_lock_ = true
+position = Vector2(840, 125.00001)
+scale = Vector2(1.912, 1.985)
+texture = ExtResource("4_d3n3q")
 
 [node name="borders" type="Area2D" parent="."]
 position = Vector2(964, -1)
