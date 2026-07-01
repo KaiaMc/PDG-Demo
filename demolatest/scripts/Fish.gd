@@ -5,14 +5,17 @@ extends Node3D
 
 @export var wander_direction : Node3D
 @export var swim_speed := 2.0
-@export var pitch_factor := 0.5       # dampens how extreme the up/down tilt looks
-@export var max_pitch_deg := 45.0     # hard clamp so it never over-rotates
+@export var pitch_factor := 0.5
+@export var max_pitch_deg := 45.0
 
 var x_location: float
 var y_location: float
 var current_point := 0
 var direction := 1
 var facing := 1  # 1 = facing +X, -1 = facing -X
+
+var current_target: Vector3
+var pitch_active := false  # only recompute rotation.x while this is true
 
 func _ready():
 	animation_player.play("fishSwim")
@@ -34,41 +37,45 @@ func _process(_delta):
 		fish_leave()
 	if Global.spawnleft:
 		Global.spawnleft = false
-		set_facing(1)   # spawned at left edge -> face inward/right
+		set_facing(1)
 	if Global.spawnright:
 		Global.spawnright = false
-		set_facing(-1)  # spawned at right edge -> face inward/left
+		set_facing(-1)
 	if Global.spinfish:
 		Global.spinfish = false
 		fish_spin()
 
-## Single source of truth for left/right facing. No scale flipping, no rotation.z hacks.
+	# Continuously reasserts pitch every frame so it can't get stuck/overridden
+	# by an animation track, and stays accurate as the fish physically moves.
+	if pitch_active:
+		_update_pitch(current_target)
+
+func _update_pitch(target: Vector3) -> void:
+	var to_target = target - global_position
+	var horizontal_dist = abs(to_target.x)
+	if horizontal_dist < 0.001 and abs(to_target.y) < 0.001:
+		return  # basically at the target, don't fight for a direction
+	var pitch = atan2(to_target.y, horizontal_dist) * pitch_factor
+	rotation.x = clamp(pitch, deg_to_rad(-max_pitch_deg), deg_to_rad(max_pitch_deg))
+
 func set_facing(new_facing: int) -> void:
 	facing = new_facing
 	rotation.y = deg_to_rad(-90 if facing == 1 else 90)
 
-## Turns the fish toward target (playing a turn animation if the facing direction
-## changes) and pitches the body to angle toward the target's height.
+## Handles yaw / turn-animation only now. Pitch is handled continuously in _process.
 func face_target(target: Vector3) -> void:
+	current_target = target
 	var to_target = target - global_position
 	var new_facing = 1 if to_target.x >= 0.0 else -1
 
 	if new_facing != facing:
-		# NOTE: preserving your original clip mapping (facing left plays "FishTurnR").
-		# Double check this isn't actually reversed in your animation asset names.
 		animation_player.play("FishTurnR" if new_facing == -1 else "FishTurnL")
 		await animation_player.animation_finished
 		set_facing(new_facing)
 		animation_player.play("fishSwim")
 
-	# Pitch: use the *relative direction to the target*, not absolute world position.
-	# Thanks to Godot's default YXZ rotation order, this works correctly regardless
-	# of which way rotation.y is currently facing - no sign flip needed.
-	var horizontal_dist = abs(to_target.x)
-	var pitch = atan2(to_target.y, horizontal_dist) * pitch_factor
-	rotation.x = clamp(pitch, deg_to_rad(-max_pitch_deg), deg_to_rad(max_pitch_deg))
-
 func fish_wander():
+	pitch_active = true
 	while not Global.fishleave and not Global.spinfish:
 		var point = wander_points[current_point]
 		await face_target(point.global_position)
@@ -86,8 +93,10 @@ func fish_wander():
 		elif current_point < 0:
 			current_point = 1
 			direction = 1
+	pitch_active = false
 
 func fish_leave():
+	pitch_active = false
 	var left_world = get_parent().screen_to_world(
 		Vector2(0, get_parent().viewport_size.y / 2)
 	)
@@ -108,5 +117,11 @@ func fish_leave():
 	Global.fishgone = true
 
 func fish_spin():
+	pitch_active = false
+	var pre_spin_transform := transform  # cache position + rotation + scale
+
 	animation_player.play("FishSpin")
 	await animation_player.animation_finished
+
+	transform = pre_spin_transform  # snap back to exact pre-spin state
+	pitch_active = true

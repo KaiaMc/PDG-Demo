@@ -135,7 +135,7 @@ fov = 90.4
 size = 30.062
 
 [node name="Temp-BG" type="MeshInstance3D" parent="."]
-transform = Transform3D(34.813, 0, -2.313207e-06, 4.9472264e-13, 19.105003, 1.1368684e-13, 6.086899e-06, 5.684342e-14, 13.229999, -0.69148254, 0.15385437, -5.2693253)
+transform = Transform3D(34.813, 0, -2.313207e-06, 4.9472264e-13, 19.105003, 1.1368684e-13, 6.086899e-06, 5.684342e-14, 13.229999, -0.69148254, 0.15385437, -6.973877)
 mesh = SubResource("PlaneMesh_08hpn")
 skeleton = NodePath("../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_aim73")
@@ -244,10 +244,10 @@ autoplay = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6331787, -11.890896, 0.019165039)
 
 [node name="rock" parent="." instance=ExtResource("7_0xo7i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.640465, -8.741278, 2.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.640465, -9.08397, 2.6)
 
 [node name="greenPlant" parent="." instance=ExtResource("8_ligcy")]
-transform = Transform3D(-0.3029891, -0.028144306, -0.9525783, 0.060975656, 0.99694306, -0.04884977, 0.9510413, -0.07288503, -0.3003468, 19.809883, -6.901, -1.8946147)
+transform = Transform3D(0.7133846, -0.07775797, -0.6964452, 0.06097565, 0.996943, -0.048849765, 0.6981147, -0.0076175313, 0.7159451, 22.489403, -6.901, -2.342277)
 
 [node name="flatPlant" parent="." instance=ExtResource("10_jgwaj")]
 transform = Transform3D(-3.431344e-08, 0, -0.785, 0, 0.785, 0, 0.785, 0, -3.431344e-08, -16.813784, -15.458471, 8.615644)
