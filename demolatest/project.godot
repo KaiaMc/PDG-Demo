@@ -32,3 +32,7 @@ project/assembly_name="demolatest"
 
 2d/physics_engine="GodotPhysics2D"
 2d/default_gravity=-101.62800000000016
+
+[rendering]
+
+anti_aliasing/quality/use_taa=true

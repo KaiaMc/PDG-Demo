@@ -30,16 +30,25 @@ func _process(delta):
 		fish_leave()
 		Global.fishleave = false
 	if Global.spawnleft == true: 
-		rotation.y = deg_to_rad(90) 
+		rotation.y = deg_to_rad(-90)
 		Global.spawnleft = false 
 	if Global.spawnright == true: 
-		rotation.y = deg_to_rad(-270) 
+		rotation.y = deg_to_rad(90) 
 		Global.spawnright = false
 
 func face_target(target: Vector3): 
+	
+	## old code
+	## animation_player.play("turn")
+	## await animation_player.finished ? idk if this will work
+	#var move_direction = target - global_position 
+	#if move_direction.x < 0: 
+		#rotation.y = deg_to_rad(-270) 
+	#else:
+		#rotation.y = deg_to_rad(90) 
+	
 	var move_direction = target - global_position 
 	if move_direction.x < 0: 
-		print(rad_to_deg(rotation.y))
 		self.scale = Vector3(1, 1, 1)
 		self.rotation.z = deg_to_rad(0)
 		animation_player.play("FishTurnR")
@@ -50,17 +59,17 @@ func face_target(target: Vector3):
 		else:
 			pass
 	else: 
-		print(self.rotation)
+		self.scale = Vector3(-1, -1, -1)
+		self.rotation.z = deg_to_rad(180)
 		animation_player.play("FishTurnL")
 		print("playing left turn")
 		await animation_player.animation_finished
-		#turns
-		self.scale = Vector3(-1, -1, -1)
-		self.rotation.z = deg_to_rad(180)
 		if rotation.y > 0:
 			rotation.y = deg_to_rad(-270) 
 		else:
 			pass
+
+	animation_player.play("fishSwim")
 
 #fish idle stuff
 func fish_wander():
@@ -70,11 +79,9 @@ func fish_wander():
 
 		face_target(point.global_position)
 		if point.global_position.y < global_position.y: 
-			rotation.z = rotationdeg * -1 /4
-			#print(rotationdeg)
+			rotation.x = rotationdeg * -1 /4
 		else: 
-			rotation.z = rotationdeg /4
-			#print(rotationdeg)
+			rotation.x = rotationdeg /4
 
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed

@@ -3,9 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://dtjribfvau2ds" path="res://assets/flatPlant.glb" id="1_kgve1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgve1"]
-albedo_color = Color(0.05547667, 0.17, 0.023799999, 0.73333335)
+albedo_color = Color(0.058085747, 0.21225104, 0.1942805, 0.73333335)
 
 [node name="flatPlant" instance=ExtResource("1_kgve1")]
+
+[node name="Skeleton3D" parent="Armature_002" index="0"]
+bones/0/rotation = Quaternion(0.015, 0, 0, 1)
+bones/1/rotation = Quaternion(-0.12, 0.085, 0, 1)
+bones/2/rotation = Quaternion(-0.29, 0.595, 0, 1)
 
 [node name="Plane_004" parent="Armature_002/Skeleton3D" index="0"]
 material_override = SubResource("StandardMaterial3D_kgve1")
