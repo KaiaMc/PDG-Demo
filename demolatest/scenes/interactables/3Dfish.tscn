@@ -10,11 +10,11 @@ transform = Transform3D(0.9921147, 0.036434647, -0.11992054, 0, 0.9568136, 0.290
 script = ExtResource("2_r7xqt")
 
 [node name="Fish" parent="." index="0"]
-transform = Transform3D(-0.98717135, 0.04379141, -0.15354185, -0.001496604, 0.9590723, 0.28315753, 0.1596576, 0.27975482, -0.9467031, -0.0054699467, 0, 0.21255055)
+transform = Transform3D(-0.98717135, 0.043791417, -0.15354185, -0.0014965964, 0.9590723, 0.28315753, 0.1596576, 0.27975482, -0.9467031, -0.02905631, -0.1254099, -0.7131834)
 
 [node name="Skeleton3D" parent="Fish" index="0"]
-bones/1/rotation = Quaternion(0.011405856, -3.0811744e-08, 1.6363949e-09, 0.999935)
-bones/2/rotation = Quaternion(-8.305906e-07, 0.03587553, 0.99935627, -1.9793923e-08)
+bones/1/rotation = Quaternion(0.011405856, -1.218679e-08, 1.869227e-09, 0.999935)
+bones/2/rotation = Quaternion(-8.305906e-07, 0.03587553, 0.99935627, -1.9793918e-08)
 
 [node name="OSCServer" type="Node" parent="." index="2"]
 script = ExtResource("3_2r7ai")

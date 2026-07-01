@@ -34,12 +34,12 @@ func _on_osc_server_message_received(address, value, time):
 	if address == "/nose:x":
 		person_x = value[0]
 	if address == "/wave":
-		#FishTwirl() (working)
+		FishTwirl()
 		pass
 		
 
 func FishTwirl():
-	pass
+	Global.spinfish = true
 
 func _process(delta):
 	if Global.fishgone == true:

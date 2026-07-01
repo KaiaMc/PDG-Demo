@@ -1,16 +1,19 @@
 extends Node3D
 
 @onready var wander_points = get_parent().get_node("WanderPoints").get_children()
-@export var wander_direction : Node3D
-@export var swim_speed := 2.0
 @onready var animation_player = $AnimationPlayer
 
-var x_location
-var y_location
+@export var wander_direction : Node3D
+@export var swim_speed := 2.0
+@export var pitch_factor := 0.5       # dampens how extreme the up/down tilt looks
+@export var max_pitch_deg := 45.0     # hard clamp so it never over-rotates
+
+var x_location: float
+var y_location: float
 var current_point := 0
 var direction := 1
+var facing := 1  # 1 = facing +X, -1 = facing -X
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	animation_player.play("fishSwim")
 	var screen_x = get_parent().person_x * get_parent().viewport_size.x
@@ -19,76 +22,63 @@ func _ready():
 	)
 	x_location = world_pos.x
 	y_location = get_parent().fish_y_spawn
-	
-	var enterTween = get_tree().create_tween()
-	enterTween.tween_property(self, "position", Vector3(x_location, y_location, 0), 4.0)
-	await enterTween.finished
+
+	var enter_tween = get_tree().create_tween()
+	enter_tween.tween_property(self, "position", Vector3(x_location, y_location, 0), 4.0)
+	await enter_tween.finished
 	fish_wander()
 
-func _process(delta):
-	if Global.fishleave == true:
-		fish_leave()
+func _process(_delta):
+	if Global.fishleave:
 		Global.fishleave = false
-	if Global.spawnleft == true: 
-		rotation.y = deg_to_rad(-90)
-		Global.spawnleft = false 
-	if Global.spawnright == true: 
-		rotation.y = deg_to_rad(90) 
+		fish_leave()
+	if Global.spawnleft:
+		Global.spawnleft = false
+		set_facing(1)   # spawned at left edge -> face inward/right
+	if Global.spawnright:
 		Global.spawnright = false
+		set_facing(-1)  # spawned at right edge -> face inward/left
+	if Global.spinfish:
+		Global.spinfish = false
+		fish_spin()
 
-func face_target(target: Vector3): 
-	
-	## old code
-	## animation_player.play("turn")
-	## await animation_player.finished ? idk if this will work
-	#var move_direction = target - global_position 
-	#if move_direction.x < 0: 
-		#rotation.y = deg_to_rad(-270) 
-	#else:
-		#rotation.y = deg_to_rad(90) 
-	
-	var move_direction = target - global_position 
-	if move_direction.x < 0: 
-		self.scale = Vector3(1, 1, 1)
-		self.rotation.z = deg_to_rad(0)
-		animation_player.play("FishTurnR")
-		print("playing right turn")
+## Single source of truth for left/right facing. No scale flipping, no rotation.z hacks.
+func set_facing(new_facing: int) -> void:
+	facing = new_facing
+	rotation.y = deg_to_rad(-90 if facing == 1 else 90)
+
+## Turns the fish toward target (playing a turn animation if the facing direction
+## changes) and pitches the body to angle toward the target's height.
+func face_target(target: Vector3) -> void:
+	var to_target = target - global_position
+	var new_facing = 1 if to_target.x >= 0.0 else -1
+
+	if new_facing != facing:
+		# NOTE: preserving your original clip mapping (facing left plays "FishTurnR").
+		# Double check this isn't actually reversed in your animation asset names.
+		animation_player.play("FishTurnR" if new_facing == -1 else "FishTurnL")
 		await animation_player.animation_finished
-		if rotation.y < 0:
-			rotation.y = deg_to_rad(180)
-		else:
-			pass
-	else: 
-		self.scale = Vector3(-1, -1, -1)
-		self.rotation.z = deg_to_rad(180)
-		animation_player.play("FishTurnL")
-		print("playing left turn")
-		await animation_player.animation_finished
-		if rotation.y > 0:
-			rotation.y = deg_to_rad(-270) 
-		else:
-			pass
+		set_facing(new_facing)
+		animation_player.play("fishSwim")
 
-	animation_player.play("fishSwim")
+	# Pitch: use the *relative direction to the target*, not absolute world position.
+	# Thanks to Godot's default YXZ rotation order, this works correctly regardless
+	# of which way rotation.y is currently facing - no sign flip needed.
+	var horizontal_dist = abs(to_target.x)
+	var pitch = atan2(to_target.y, horizontal_dist) * pitch_factor
+	rotation.x = clamp(pitch, deg_to_rad(-max_pitch_deg), deg_to_rad(max_pitch_deg))
 
-#fish idle stuff
 func fish_wander():
-	while Global.fishleave == false:
+	while not Global.fishleave and not Global.spinfish:
 		var point = wander_points[current_point]
-		var rotationdeg = atan2(abs(point.global_position.y), abs(point.global_position.x))
-
-		face_target(point.global_position)
-		if point.global_position.y < global_position.y: 
-			rotation.x = rotationdeg * -1 /4
-		else: 
-			rotation.x = rotationdeg /4
+		await face_target(point.global_position)
 
 		var distance = global_position.distance_to(point.global_position)
 		var duration = distance / swim_speed
-		var wandertween = get_tree().create_tween()
+		var wander_tween = get_tree().create_tween()
+		wander_tween.tween_property(self, "global_position", point.global_position, duration)
+		await wander_tween.finished
 
-		wandertween.tween_property(self, "global_position", point.global_position, duration)
-		await wandertween.finished
 		current_point += direction
 		if current_point >= wander_points.size():
 			current_point = wander_points.size() - 2
@@ -96,30 +86,27 @@ func fish_wander():
 		elif current_point < 0:
 			current_point = 1
 			direction = 1
-		if current_point >= wander_points.size():
-			current_point = 0
 
 func fish_leave():
-	print("running fish leave")
-	rotation.z = deg_to_rad(0)
 	var left_world = get_parent().screen_to_world(
 		Vector2(0, get_parent().viewport_size.y / 2)
 	)
 	var right_world = get_parent().screen_to_world(
 		Vector2(get_parent().viewport_size.x, get_parent().viewport_size.y / 2)
 	)
-
 	if get_parent().person_x * get_parent().viewport_size.x >= get_parent().viewport_size.x / 2:
 		x_location = right_world.x + 2.0
 		Global.spawnleft = true
 	else:
 		x_location = left_world.x - 2.0
 		Global.spawnright = true
-	
-	var leaveTween = get_tree().create_tween()
-	print("making tween")
+
+	var leave_tween = get_tree().create_tween()
 	y_location = self.global_position.y
-	leaveTween.tween_property(self, "global_position", Vector3(x_location, y_location, global_position.z),4)
-	await leaveTween.finished
-	print("finished tween")
+	leave_tween.tween_property(self, "global_position", Vector3(x_location, y_location, global_position.z), 4)
+	await leave_tween.finished
 	Global.fishgone = true
+
+func fish_spin():
+	animation_player.play("FishSpin")
+	await animation_player.animation_finished
