@@ -12,4 +12,4 @@ From there, verify that your TouchDesigner file is open and running by checking 
 Finally, in godot, navigate to the top right of the screen and select the "play" button. The project should automatically open in a new window.
 
 ## HOW TO USE:
-1. To trigger fish spawns, the camera first has to detect no faces. Cover your webcam (NOT your face, cover the WEBCAM to ensure no faces are detected), the fish will appear once you take your hand away.
+1. To trigger fish spawns, the camera first has to detect no faces. Cover your webcam (**NOT your face, cover the _WEBCAM_ to ensure no faces are detected**), the fish will appear once you take your hand away.
