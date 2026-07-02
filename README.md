@@ -1,6 +1,6 @@
 ### This project requires both Godot and TouchDesigner to be installed and running simultaneously, along with a working webcam.
 
-<img width="1920" height="1030" alt="Image" src="https://github.com/user-attachments/assets/f447d23d-0e11-41bd-94c5-87c8c68dbc71" />
+<img width="1280" height="720" alt="Image" src="https://github.com/user-attachments/assets/f447d23d-0e11-41bd-94c5-87c8c68dbc71" />
 
 ## DOWNLOAD INSTRUCTIONS:
 
