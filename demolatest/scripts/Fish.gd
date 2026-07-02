@@ -70,6 +70,7 @@ func face_target(target: Vector3) -> void:
 
 	if new_facing != facing:
 		animation_player.play("FishTurnR" if new_facing == -1 else "FishTurnL")
+		print(animation_player.current_animation)
 		await animation_player.animation_finished
 		set_facing(new_facing)
 		animation_player.play("fishSwim")
