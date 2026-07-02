@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://gr40fsi03d6m"]
 
-[ext_resource type="PackedScene" uid="uid://62cwtmhgdwdj" path="res://assets/fishnew.glb" id="1_lffeb"]
+[ext_resource type="PackedScene" uid="uid://bypelcgsi75ng" path="res://assets/fishnew.glb" id="1_lffeb"]
 [ext_resource type="Script" uid="uid://dr74ehojjvvum" path="res://scripts/Fish.gd" id="2_r7xqt"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="3_2r7ai"]
 [ext_resource type="Script" uid="uid://tdoy6n5ivl2p" path="res://addons/godOSC/scripts/OSCReceiver.gd" id="4_qys86"]
@@ -9,14 +9,11 @@
 script = ExtResource("2_r7xqt")
 
 [node name="Fish" parent="." index="0"]
-transform = Transform3D(-0.98717135, 0.04379141, -0.15354185, -0.0014966038, 0.9590723, 0.28315753, 0.1596576, 0.27975482, -0.9467031, -0.02905631, -0.1254099, -0.7131834)
-
-[node name="Skeleton3D" parent="Fish" index="0"]
-bones/1/rotation = Quaternion(0.010933226, -0.0011330321, -0.2848686, 0.95850354)
-bones/2/rotation = Quaternion(0.0036827037, 0.034547422, 0.96235204, 0.26957664)
+transform = Transform3D(1, 0, 0, 0, 0.95105654, 0.309017, 0, -0.309017, 0.95105654, 0, 0, 0)
 
 [node name="FishMesh" parent="Fish/Skeleton3D" index="0"]
-transform = Transform3D(0.99889976, -0.046487965, -0.0061846077, 0.04275631, 0.9569219, -0.28718075, 0.019268617, 0.28660023, 0.9578566, 0, 0, 0)
+transform = Transform3D(0.99889976, -0.046487965, -0.0061846077, 0.043355756, 0.965671, -0.2561255, 0.017879026, 0.25557542, 0.9666239, 0, 0, 0)
+ignore_occlusion_culling = true
 
 [node name="OSCServer" type="Node" parent="." index="2"]
 script = ExtResource("3_2r7ai")

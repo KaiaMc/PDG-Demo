@@ -67,6 +67,12 @@ func face_target(target: Vector3) -> void:
 	current_target = target
 	var to_target = target - global_position
 	var new_facing = 1 if to_target.x >= 0.0 else -1
+	
+
+	#if new_facing == 1:
+		#self.scale = Vector3(-1,-1,-1)
+	#if new_facing == -1:
+		#self.scale = Vector3(1,1,1)
 
 	if new_facing != facing:
 		animation_player.play("FishTurnR" if new_facing == -1 else "FishTurnL")
