@@ -422,5 +422,18 @@ autoplay = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aim73")
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="UI"]
+offset_left = 1826.0
+offset_top = 21.0
+offset_right = 1898.0
+offset_bottom = 61.0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.429, 0.66, 0.429, 1)
+text = "quit
+"
+
 [connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]
