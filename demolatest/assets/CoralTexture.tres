@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bh0jaeuejty6t"]
+
+[ext_resource type="Texture2D" uid="uid://c47pr3uwdrikf" path="res://assets/coral_CoralTexture.png" id="1_oxn1e"]
+[ext_resource type="Material" uid="uid://b51vs6hi1y3g0" path="res://textures/Outline.tres" id="2_jdhjp"]
+
+[resource]
+next_pass = ExtResource("2_jdhjp")
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("1_oxn1e")

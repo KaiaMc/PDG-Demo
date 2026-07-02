@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw4m04pxjrbow"]
+
+[ext_resource type="PackedScene" uid="uid://djahxp10vxxnt" path="res://assets/coral.glb" id="1_xquyb"]
+[ext_resource type="Material" uid="uid://bh0jaeuejty6t" path="res://assets/CoralTexture.tres" id="2_dfjjv"]
+
+[node name="coral" instance=ExtResource("1_xquyb")]
+
+[node name="CoralPlant" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_dfjjv")

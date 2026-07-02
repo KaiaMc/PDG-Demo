@@ -118,11 +118,15 @@ func fish_leave():
 	Global.fishgone = true
 
 func fish_spin():
-	pitch_active = false
-	var pre_spin_transform := transform  # cache position + rotation + scale
-
 	animation_player.play("FishSpin")
 	await animation_player.animation_finished
-
-	transform = pre_spin_transform  # snap back to exact pre-spin state
-	pitch_active = true
+	
+	##trying to reset pos 
+	#pitch_active = false
+	#var pre_spin_transform := transform  # cache position + rotation + scale
+#
+	#animation_player.play("FishSpin")
+	#await animation_player.animation_finished
+#
+	#transform = pre_spin_transform  # snap back to exact pre-spin state
+	#pitch_active = true

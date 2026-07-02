@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://3ktnm62nxt42"]
+[gd_scene load_steps=28 format=4 uid="uid://3ktnm62nxt42"]
 
 [ext_resource type="Script" uid="uid://dwmlo3fci1jhl" path="res://scripts/main.gd" id="1_08hpn"]
 [ext_resource type="Script" uid="uid://w8v0v76wc4r2" path="res://addons/godOSC/scripts/OSCServer.gd" id="2_imghw"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://caimev42k5l7m" path="res://assets/sounds/Ambient Example.wav" id="9_jgwaj"]
 [ext_resource type="PackedScene" uid="uid://cvsbar7x1tdmq" path="res://scenes/interactables/flat_plant.tscn" id="10_jgwaj"]
 [ext_resource type="Material" uid="uid://bqwxdlcga80st" path="res://textures/Painterly leaves.004.tres" id="11_aim73"]
+[ext_resource type="PackedScene" uid="uid://bw4m04pxjrbow" path="res://scenes/interactables/coral.tscn" id="12_xvofe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apk53"]
 emission_enabled = true
@@ -134,11 +135,12 @@ projection = 1
 fov = 90.4
 size = 30.062
 
-[node name="Temp-BG" type="MeshInstance3D" parent="."]
+[node name="BG" type="MeshInstance3D" parent="."]
 transform = Transform3D(34.813, 0, -2.313207e-06, 4.9472264e-13, 19.105003, 1.1368684e-13, 6.086899e-06, 5.684342e-14, 13.229999, -0.69148254, 0.15385437, -6.973877)
 mesh = SubResource("PlaneMesh_08hpn")
 skeleton = NodePath("../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_aim73")
+metadata/_edit_lock_ = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18317223, 33.881844)
@@ -244,13 +246,13 @@ autoplay = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6331787, -11.890896, 0.019165039)
 
 [node name="rock" parent="." instance=ExtResource("7_0xo7i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.640465, -9.08397, 2.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.79654, -9.08397, 2.6)
 
 [node name="greenPlant" parent="." instance=ExtResource("8_ligcy")]
 transform = Transform3D(0.7133846, -0.07775797, -0.6964452, 0.06097565, 0.996943, -0.048849765, 0.6981147, -0.0076175313, 0.7159451, 22.489403, -6.901, -2.342277)
 
 [node name="flatPlant" parent="." instance=ExtResource("10_jgwaj")]
-transform = Transform3D(-3.431344e-08, 0, -0.785, 0, 0.785, 0, 0.785, 0, -3.431344e-08, -16.813784, -15.458471, 8.615644)
+transform = Transform3D(-3.431344e-08, 0, -0.785, 0, 0.785, 0, 0.785, 0, -3.431344e-08, -18.403036, -15.458471, 8.615644)
 
 [node name="flatPlant2" type="Node3D" parent="."]
 transform = Transform3D(-3.431344e-08, 0, -0.785, 0, 0.785, 0, 0.785, 0, -3.431344e-08, -24.496578, -13.607, -2.9123096)
@@ -285,8 +287,44 @@ material_override = SubResource("StandardMaterial3D_kgve1")
 mesh = SubResource("ArrayMesh_slunc")
 skin = SubResource("Skin_7ipgm")
 
+[node name="flatPlant3" type="Node3D" parent="."]
+transform = Transform3D(-3.431344e-08, 0, -0.785, 0, 0.785, 0, 0.785, 0, -3.431344e-08, 17.409, -13.607, 4)
+
+[node name="Armature_002" type="Node3D" parent="flatPlant3"]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="flatPlant3/Armature_002"]
+bones/0/name = "Bottom"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 2.3841855e-07, 0, 1, 0, -2.3841855e-07, 0, 1, 0, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0.015, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "Middle"
+bones/1/parent = 0
+bones/1/rest = Transform3D(1, 0, 2.842171e-14, 0, 1, 0, -2.842171e-14, 0, 1, 0, 7.033267, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 7.033267, 0)
+bones/1/rotation = Quaternion(0.135, 0.085, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "Top"
+bones/2/parent = 1
+bones/2/rest = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, 6.503765, 0)
+bones/2/enabled = true
+bones/2/position = Vector3(0, 6.503765, 0)
+bones/2/rotation = Quaternion(-0.29, 0.595, 0, 1)
+bones/2/scale = Vector3(1, 1, 1)
+
+[node name="Plane_004" type="MeshInstance3D" parent="flatPlant3/Armature_002/Skeleton3D"]
+material_override = SubResource("StandardMaterial3D_kgve1")
+mesh = SubResource("ArrayMesh_slunc")
+skin = SubResource("Skin_7ipgm")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aim73")
+
+[node name="coral" parent="." instance=ExtResource("12_xvofe")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -25.428186, -14.470251, 2.935)
 
 [connection signal="message_received" from="OSCServer" to="." method="_on_osc_server_message_received"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
