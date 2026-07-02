@@ -2,7 +2,7 @@
 
 ## DOWNLOAD INSTRUCTIONS:
 
-1. Download Godot (tested on 4.5 and 4.7. Not tested on newer/older versions) here: https://godotengine.org/download/archive/
+1. Download Godot (tested on 4.5 and 4.7) here: https://godotengine.org/download/archive/
 2. Download Touchdesigner (latest) here: https://derivative.ca/download
 3. Download the Touchdesginer project file, unzip, and open PDG_TouchDesigner_Demo.toe within the folder (the folder is too big for github, download here via google drive: https://drive.google.com/drive/folders/1YBtsx-qrEVPJbv1uTlcwuwiDbyhDf4MB?usp=sharing)
 4. Download and open the Godot project file

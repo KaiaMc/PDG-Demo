@@ -18,7 +18,7 @@ var current_target: Vector3
 var pitch_active := false  # only recompute rotation.x while this is true
 
 func _ready():
-	animation_player.play("fishSwim")
+	animation_player.play("fishSwim_001")
 	var screen_x = get_parent().person_x * get_parent().viewport_size.x
 	var world_pos = get_parent().screen_to_world(
 		Vector2(screen_x, get_parent().viewport_size.y / 2)
@@ -73,7 +73,7 @@ func face_target(target: Vector3) -> void:
 		print(animation_player.current_animation)
 		await animation_player.animation_finished
 		set_facing(new_facing)
-		animation_player.play("fishSwim")
+		animation_player.play("fishSwim_001")
 
 func fish_wander():
 	pitch_active = true
@@ -118,11 +118,15 @@ func fish_leave():
 	Global.fishgone = true
 
 func fish_spin():
-	pitch_active = false
-	var pre_spin_transform := transform  # cache position + rotation + scale
-
 	animation_player.play("FishSpin")
 	await animation_player.animation_finished
-
-	transform = pre_spin_transform  # snap back to exact pre-spin state
-	pitch_active = true
+	
+	##trying to reset pos 
+	#pitch_active = false
+	#var pre_spin_transform := transform  # cache position + rotation + scale
+#
+	#animation_player.play("FishSpin")
+	#await animation_player.animation_finished
+#
+	#transform = pre_spin_transform  # snap back to exact pre-spin state
+	#pitch_active = true
