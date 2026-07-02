@@ -12,8 +12,8 @@ script = ExtResource("2_r7xqt")
 transform = Transform3D(-0.98717135, 0.04379141, -0.15354185, -0.0014966038, 0.9590723, 0.28315753, 0.1596576, 0.27975482, -0.9467031, -0.02905631, -0.1254099, -0.7131834)
 
 [node name="Skeleton3D" parent="Fish" index="0"]
-bones/1/rotation = Quaternion(0.011405856, -1.218679e-08, 1.869227e-09, 0.999935)
-bones/2/rotation = Quaternion(-8.305906e-07, 0.03587553, 0.99935627, -1.9793918e-08)
+bones/1/rotation = Quaternion(0.010933226, -0.0011330321, -0.2848686, 0.95850354)
+bones/2/rotation = Quaternion(0.0036827037, 0.034547422, 0.96235204, 0.26957664)
 
 [node name="FishMesh" parent="Fish/Skeleton3D" index="0"]
 transform = Transform3D(0.99889976, -0.046487965, -0.0061846077, 0.04275631, 0.9569219, -0.28718075, 0.019268617, 0.28660023, 0.9578566, 0, 0, 0)

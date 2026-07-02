@@ -18,7 +18,7 @@ var current_target: Vector3
 var pitch_active := false  # only recompute rotation.x while this is true
 
 func _ready():
-	animation_player.play("fishSwim")
+	animation_player.play("fishSwim_001")
 	var screen_x = get_parent().person_x * get_parent().viewport_size.x
 	var world_pos = get_parent().screen_to_world(
 		Vector2(screen_x, get_parent().viewport_size.y / 2)
@@ -73,7 +73,7 @@ func face_target(target: Vector3) -> void:
 		print(animation_player.current_animation)
 		await animation_player.animation_finished
 		set_facing(new_facing)
-		animation_player.play("fishSwim")
+		animation_player.play("fishSwim_001")
 
 func fish_wander():
 	pitch_active = true
